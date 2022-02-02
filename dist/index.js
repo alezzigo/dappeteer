@@ -65,12 +65,9 @@ function setupMetamask(browser, options = {}) {
         const page = yield closeHomeScreen(browser);
         const l = yield isLock(page);
         if (l) {
-            const m = yield metamask_1.getMetamask(page);
-            // await m.unlock(options.password || 'password1234');
             yield page.type('#password', 'password1234');
             yield page.waitFor(3000);
             const button = yield page.$('button[type="submit"]');
-            console.log(button);
             yield button.click();
         }
         else {
@@ -84,7 +81,7 @@ function setupMetamask(browser, options = {}) {
 exports.setupMetamask = setupMetamask;
 function isLock(metamaskPage) {
     return __awaiter(this, void 0, void 0, function* () {
-        const continueButton = yield metamaskPage.waitForSelector('.unlock-page');
+        const continueButton = yield metamaskPage.$('.unlock-page');
         return continueButton;
     });
 }

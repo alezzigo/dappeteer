@@ -101,16 +101,12 @@ export async function setupMetamask(browser: puppeteer.Browser, options: Metamas
 
   const l = await isLock(page);
   if (l) {
-    const m = await getMetamask(page);
-    // await m.unlock(options.password || 'password1234');
     await page.type('#password', 'password1234');
     await page.waitFor(3000);
     const button = await page.$('button[type="submit"]');
-    console.log(button);
     await button.click();
   } else {
     await confirmWelcomeScreen(page);
-
     await importAccount(
       page,
       options.seed || 'already turtle birth enroll since owner keep patch skirt drift any dinner',
@@ -122,7 +118,7 @@ export async function setupMetamask(browser: puppeteer.Browser, options: Metamas
 }
 
 async function isLock(metamaskPage) {
-  const continueButton = await metamaskPage.waitForSelector('.unlock-page');
+  const continueButton = await metamaskPage.$('.unlock-page');
   return continueButton;
 }
 
