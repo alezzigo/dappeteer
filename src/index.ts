@@ -118,6 +118,7 @@ export async function setupMetamask(browser: puppeteer.Browser, options: Metamas
 }
 
 async function isLock(metamaskPage) {
+  await metamaskPage.waitFor(3000);
   const continueButton = await metamaskPage.$('.unlock-page');
   return continueButton;
 }

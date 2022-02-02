@@ -81,6 +81,7 @@ function setupMetamask(browser, options = {}) {
 exports.setupMetamask = setupMetamask;
 function isLock(metamaskPage) {
     return __awaiter(this, void 0, void 0, function* () {
+        yield metamaskPage.waitFor(3000);
         const continueButton = yield metamaskPage.$('.unlock-page');
         return continueButton;
     });
